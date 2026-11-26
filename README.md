@@ -34,13 +34,17 @@ adb devices
 
 ### 2. 安装
 
-直接安装仓库里预编译好的 APK：
+**推荐：从 Releases 下载已签名的 APK**（不需要编译）：
+
+👉 **[下载最新版 APK](https://github.com/hevents/tvguo-castlist/releases/latest/download/tvguo-castlist.apk)** ｜ [全部版本](https://github.com/hevents/tvguo-castlist/releases)
+
+下载后执行：
 
 ```
-adb install -r apk/tvguo-castlist.apk
+adb install -r tvguo-castlist.apk
 ```
 
-或从源码自行编译（见下）。安装后服务会自动启动；若没有，可打开应用图标，或发送广播：
+也可以安装仓库 `apk/` 目录下的预编译版本，或从源码自行编译（见下）。安装后服务会自动启动；若没有，可打开应用图标，或发送广播：
 
 ```
 adb shell am broadcast -a com.tvguo.castlist.START -n com.tvguo.castlist/.BootReceiver
