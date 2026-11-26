@@ -1,0 +1,24 @@
+# 本地签名密钥（绝对不要提交）
+*.jks
+*.keystore
+*.idsig
+
+# 构建中间产物
+.build/
+build/
+out/
+classes/
+dex/
+gen/
+sources.txt
+classlist.txt
+base.apk
+aligned.apk
+
+# 编辑器/系统文件
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+__pycache__/
+*.pyc

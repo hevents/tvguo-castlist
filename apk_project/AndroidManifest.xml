@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 电视果投屏列表 APK 清单：开机自启 + 前台服务 + 局域网 HTTP 服务 -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tvguo.castlist"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <!-- 局域网 HTTP + 访问本机 DLNA(127.0.0.1:39620) + 下载视频 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:allowBackup="true"
+        android:label="投屏列表"
+        android:theme="@android:style/Theme.Material.Light"
+        android:usesCleartextTraffic="true">
+
+        <!-- 手动启动入口：装完点一下图标即可启动服务（自启失效时的兜底） -->
+        <activity android:name=".MainActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 前台服务：常驻通知，承载 HTTP server + 轮询线程 -->
+        <service android:name=".MainService" android:exported="false" />
+
+        <!-- 开机自启广播接收器：部分国产固件会砍 BOOT_COMPLETED，加了多重 action 兜底 -->
+        <receiver android:name=".BootReceiver" android:enabled="true" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.tvguo.castlist.START" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
