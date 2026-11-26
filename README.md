@@ -60,6 +60,14 @@ http://<电视果IP>:18090/
 
 IP 可在路由器 DHCP 列表、电视设置里查看；App 前台通知里也会显示。用手机向电视果投屏，10 秒内列表出现新条目并开始下载。
 
+**Windows 一键打开（不用记 IP）**：双击 `scripts/打开电视果面板.bat`。它会在局域网广播 SSDP 发现电视果、探测 18090 端口，然后用默认浏览器打开面板；不需要管理员权限、不改 hosts、不依赖 Python。找不到时会自动扫本机同网段。也可手动指定 IP：
+
+```
+powershell -ExecutionPolicy Bypass -File scripts\open_panel.ps1 -Ip 192.168.x.x
+```
+
+运行日志写在 `scripts\open_panel.log`，方便排查。
+
 ## Web 接口
 
 | 路径 | 作用 |
@@ -104,7 +112,10 @@ python3 apk_project/build.sh
 │   ├── AndroidManifest.xml
 │   ├── build.sh                    # 纯命令行构建脚本
 │   └── src/com/tvguo/castlist/     # Java 源码
-└── docs/enable-adb.zh-CN.md        # 开启 USB 调试说明
+├── docs/enable-adb.zh-CN.md        # 开启 USB 调试说明
+└── scripts/
+    ├── 打开电视果面板.bat          # Windows 双击即用：发现 IP 并打开网页
+    └── open_panel.ps1              # 背后的 SSDP 发现 + 端口探测脚本
 ```
 
 ## 许可
